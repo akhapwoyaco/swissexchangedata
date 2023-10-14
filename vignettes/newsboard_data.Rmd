@@ -1,0 +1,116 @@
+---
+title: "newsboard_data"
+output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{newsboard_data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{swissexchangedata, rvest}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+# Introduction to swissechangedata's  newsboard_data() function
+
+This vignette offers a glimpse on the inner functions of the `swissexchangedata`package, built up for **educational purpose** to learn and sharpen skills in web-scrapping of data from online sources, data wrangling and package development.
+
+When extracting the Swiss Stock Exchange data from the [Six Group newsboard](https://www.six-group.com/en/products-services/the-swiss-stock-exchange/market-data/news-tools/newsboard.html#/) website, you must: 
+
++ Define the `Date Range`, `Message Type`, `Market` and `Products`. 
++ Open in separate view for printing and saving into a pdf file\
+
+The `swissexchangedata` facilitates ease of defining the desired parameters and accessing the data directly into your `workspace`, making use of the currently existing function  news `newsboard_data()`. 
+
+More functions will be added to capture access of data from other tabs provided on the company website. 
+
+The data range capture only 2 years of data, so the stored data requires updating over time to capture most of the data. Looking forward to have various versions of data that update over time.
+
+
+The scrapped data is cleaned further to add nested data. 
+
+# Data Access
+
+```{r setup}
+library(swissexchangedata)
+library(rvest)
+```
+
+
+Get the data for September 2023 up-to-date:\
+
+```{r}
+all_items_data_sep_2024 <- newsboard_data(firstDate = '2023-10-01', lastDate = Sys.Date())
+```
+
+```{r, eval=FALSE}
+all_items_data_sep_2024
+```
+
+## Data Cleaning
+
+Apparently, the `newsText` column contains further tables on the trades, for which access require further cleaning. The cleaning code is also used in cleaning data package data `swissexchangedata::newsboardmarketdata` and replicated herein.
+
+```{r}
+# obtain the preceding text
+itemlist_newsText_clean <-function(vec){
+  # obtain the preceding text
+  read_html(vec) |> html_text()
+}
+# obtain the data table
+itemlist_newsText_table_clean <-function(vec){
+  
+  # obtain the html tabke from the vector
+  temp_obj = read_html(vec) |> html_table(fill=TRUE) #|> unlist()
+  # |>  do.call(rbind, lapply(., as.data.frame))
+  
+  # if no data, skip, else convert to dataframe
+  if (!is.null(temp_obj)){
+    temp_obj = temp_obj |> as.matrix() |>
+      t() |>
+      as.data.frame() #|> unlist()
+  } else {
+    NA
+  }
+  temp_obj
+}
+```
+
+
+```{r}
+# get copy of data to all_items_data_sep_2024
+all_items_data_sep_2024_original <- all_items_data_sep_2024
+# extract text and table from newsText through apply
+newsText_column_index <- grep("newsText", colnames(all_items_data_sep_2024))
+#
+all_items_data_sep_2024$data <- apply(
+  X = all_items_data_sep_2024[,newsText_column_index,drop=FALSE],
+  MARGIN = 1, simplify = T,
+  FUN = itemlist_newsText_clean)
+#
+all_items_data_sep_2024$table_data <- apply(
+  X = all_items_data_sep_2024[,newsText_column_index,drop=FALSE],
+  MARGIN = 1, simplify = F,
+  FUN = itemlist_newsText_table_clean)
+```
+
+## Output
+
+```{r}
+all_items_data_sep_2024[1:2,1:15]
+```
+
+The data column on trades has been extracted from the HTML paragraph.
+
+```{r}
+all_items_data_sep_2024[1,16][[1]][[1]]
+```
+
+
+

@@ -1,0 +1,25 @@
+Package: swissexchangedata
+Type: Package
+Title: Obtains The Swiss Stock Exchange Market Data News Via The SIX Group Newsboard Website
+Version: 0.1.0
+Authors@R: 
+    person("Akhapwoya Obuchere",  role = c("aut", "cre"),
+    email = "akhapwoyaco@scalableanalytics.co.ke")
+Description: Convenience functions to make data acquisition from 
+    the SIX Group Website a bit easier.
+Maintainer: Akhapwoya Obuchere <akhapwoya@scalableanalytics.co.ke>
+License: MIT + file LICENSE
+LazyData: true
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: plyr, jsonlite
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    rvest
+Config/testthat/edition: 3
+VignetteBuilder: knitr
