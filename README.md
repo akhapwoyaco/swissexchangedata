@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/akhapwoyaco/swissexchangedata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/akhapwoyaco/swissexchangedata/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/akhapwoyaco/swissexchangedata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/akhapwoyaco/swissexchangedata?branch=main)
 <!-- badges: end -->
 
 ## Overview
