@@ -10,6 +10,10 @@
 
 ## Overview
 
+The `swissexchangedata` package, built up for **educational purpose** to
+learn and sharpen skills in web-scrapping of data from online sources,
+data wrangling and package development processes.
+
 swisswxchangedata facilitates ease of access of the
 `Swiss Stock Exchange Market Data News` Via [The SIX Group Newsboard
 Website](https://www.six-group.com/en/products-services/the-swiss-stock-exchange/market-data/news-tools/newsboard.html#/)
