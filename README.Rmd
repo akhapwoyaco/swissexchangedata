@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # swissexchangedata
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/akhapwoyaco/swissexchangedata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/akhapwoyaco/swissexchangedata/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -40,10 +41,10 @@ library(swissexchangedata)
 ## basic example code
 ```
 
-Get the data for 10th October 2023 up-to-date:\
+Get the data for 9th October 2023 up-to-date:\
 
 ```{r}
-data_10thOct_2024 <- newsboard_data(firstDate = '2023-10-12', lastDate = Sys.Date())
+data_10thOct_2024 <- newsboard_data(firstDate = '2023-10-10', lastDate = Sys.Date())
 ```
 
 

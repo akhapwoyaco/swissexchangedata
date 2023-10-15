@@ -4,10 +4,10 @@ Title: Obtains The Swiss Stock Exchange Market Data News Via The SIX Group Newsb
 Version: 0.1.0
 Authors@R: 
     person("Akhapwoya Obuchere",  role = c("aut", "cre"),
-    email = "akhapwoyaco@scalableanalytics.co.ke")
+    email = "akhapwoyaco@gmail.com")
 Description: Convenience functions to make data acquisition from 
     the SIX Group Website a bit easier.
-Maintainer: Akhapwoya Obuchere <akhapwoya@scalableanalytics.co.ke>
+Maintainer: Akhapwoya Obuchere <akhapwoyaco@gmail.com>
 License: MIT + file LICENSE
 LazyData: true
 Encoding: UTF-8
